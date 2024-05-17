@@ -69,8 +69,6 @@ else
     git clone "$GIT_REPO_URL" "$INSTALL_DIR"
 fi
 
-cp -r sensei_nakama/programs/sensei_nakama /usr/bin/
-
 # Copy configuration files if the directory doesn't already exist
 if [ ! -d "$CONFIG_DIR" ]; then
     echo "Creating the configuration directory and copying the configuration file..."
