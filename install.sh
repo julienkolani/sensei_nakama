@@ -34,19 +34,19 @@ install_dependencies() {
     if command_exists apt-get; then
         echo "Installing dependencies via apt-get..."
         apt-get update
-        apt-get install -y python3 python3-pip git
+        apt-get install -y python3 python3-pip python-virtualenv git
     elif command_exists dnf; then
         echo "Installing dependencies via dnf..."
-        dnf install -y python3 python3-pip git
+        dnf install -y python3 python3-pip python-virtualenv git
     elif command_exists yum; then
         echo "Installing dependencies via yum..."
-        yum install -y python3 python3-pip git
+        yum install -y python3 python3-pip python-virtualenv git
     elif command_exists pacman; then
         echo "Installing dependencies via pacman..."
-        pacman -Sy --noconfirm python python-pip git
+        pacman -Sy --noconfirm python python-pip python-virtualenv git
     elif command_exists zypper; then
         echo "Installing dependencies via zypper..."
-        zypper install -y python3 python3-pip git
+        zypper install -y python3 python3-pip python-virtualenv git
     else
         echo "No compatible package manager found. Please install Python, pip, and Git manually."
         exit 1
