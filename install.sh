@@ -43,7 +43,7 @@ install_dependencies() {
         yum install -y python3 python3-pip git
     elif command_exists pacman; then
         echo "Installing dependencies via pacman..."
-        pacman -Sy --noconfirm python python-pip git
+        pacman -Sy --noconfirm python3 python3-pip git
     elif command_exists zypper; then
         echo "Installing dependencies via zypper..."
         zypper install -y python3 python3-pip git
@@ -102,7 +102,7 @@ Description=$SERVICE_NAME Service
 After=network.target
 
 [Service]
-ExecStart=$VIRTUAL_ENV_PATH/bin/python $PYTHON_SCRIPT_PATH
+ExecStart=$VIRTUAL_ENV_PATH/bin/python3 $PYTHON_SCRIPT_PATH
 Restart=always
 User=root
 Group=root
