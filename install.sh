@@ -78,10 +78,6 @@ else
     echo "Configuration directory $CONFIG_DIR already exists. Skipping configuration file copy."
 fi
 
-# Make the Python script executable
-echo "Making Python script executable..."
-chmod +x "$PYTHON_SCRIPT_PATH"
-
 # Create the virtual environment and install dependencies
 if [ ! -d "$VIRTUAL_ENV_PATH" ]; then
     echo "Creating the virtual environment and installing the dependencies..."
