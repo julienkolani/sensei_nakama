@@ -16,6 +16,12 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Check if the system has Systemd
+if ! systemctl --version > /dev/null 2>&1; then
+    echo "This system does not have Systemd. The script cannot continue."
+    exit 1
+fi
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" &> /dev/null
