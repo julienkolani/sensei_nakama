@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Variables
 GIT_REPO_URL="https://github.com/julienkolani/sensei_nakama.git"
 INSTALL_DIR=/usr/bin/sensei_nakama
