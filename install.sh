@@ -3,6 +3,7 @@
 set -euo pipefail
 
 # Variables
+GIT_REPO_NAME="sensei_nakama"
 GIT_REPO_URL="https://github.com/julienkolani/sensei_nakama.git"
 INSTALL_DIR="/usr/bin/sensei_nakama"
 CONFIG_DIR="/etc/sensei_nakama"
@@ -76,10 +77,12 @@ echo "Creating the directory for the program and copying the files..."
 if [ -d "$INSTALL_DIR" ]; then
     echo "Directory $INSTALL_DIR already exists. Updating repository..."
     rm -rf "$INSTALL_DIR"
-    git clone "$GIT_REPO_URL" "$INSTALL_DIR"
+    git clone "$GIT_REPO_URL" 
+    mv "$GIT_REPO_NAME"/* "$INSTALL_DIR"
 else
     echo "Cloning the repository from Git..."
-    git clone "$GIT_REPO_URL" "$INSTALL_DIR"
+    git clone "$GIT_REPO_URL"
+    mv "$GIT_REPO_NAME"/* "$INSTALL_DIR"
 fi
 
 # Copy configuration files if the directory doesn't already exist
