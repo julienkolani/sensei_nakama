@@ -7,7 +7,7 @@ GIT_REPO_NAME="sensei_nakama"
 GIT_REPO_URL="https://github.com/julienkolani/sensei_nakama.git"
 INSTALL_DIR="/usr/bin/sensei_nakama"
 CONFIG_DIR="/etc/sensei_nakama"
-PYTHON_SCRIPT_PATH="$INSTALL_DIR/main.py"
+PYTHON_SCRIPT_PATH="$INSTALL_DIR/programs/main.py"
 VIRTUAL_ENV_PATH="$INSTALL_DIR/venv"
 SERVICE_NAME="sensei_nakama"
 LOG_IDENTIFIER="sensei_nakama"
@@ -40,20 +40,30 @@ command_exists() {
 install_dependencies() {
     if command_exists apt-get; then
         echo "Installing dependencies via apt-get..."
+        set +x
         apt-get update -y
         apt-get install -y python3 python3-pip git curl
+        set -x
     elif command_exists dnf; then
         echo "Installing dependencies via dnf..."
+        set +x
         dnf install -y python3 python3-pip git curl
+        set -x
     elif command_exists yum; then
         echo "Installing dependencies via yum..."
+        set +x
         yum install -y python3 python3-pip git curl
+        set -x
     elif command_exists pacman; then
         echo "Installing dependencies via pacman..."
+        set +x
         pacman -Sy --noconfirm python3 python3-pip git curl
+        set -x
     elif command_exists zypper; then
         echo "Installing dependencies via zypper..."
+        set +x
         zypper install -y python3 python3-pip git curl
+        set -x
     else
         echo "No compatible package manager found. Please install Python, pip, and Git manually."
         exit 1
@@ -65,9 +75,7 @@ if [[ $VERBOSE -eq 1 ]]; then
     echo "Installing dependencies ..."
     install_dependencies
 else
-    set +x
     install_dependencies
-    set -x
 fi
 
 # Create the directory for the program and copy the files
@@ -82,6 +90,7 @@ if [ -d "$INSTALL_DIR" ]; then
 else
     echo "Cloning the repository from Git..."
     git clone "$GIT_REPO_URL"
+    mkdir -p "$INSTALL_DIR"
     mv "$GIT_REPO_NAME"/* "$INSTALL_DIR"
 fi
 
@@ -89,7 +98,7 @@ fi
 if [ ! -d "$CONFIG_DIR" ]; then
     echo "Creating the configuration directory and copying the configuration file..."
     mkdir -p "$CONFIG_DIR"
-    cp "$INSTALL_DIR/sensei_nakama.conf" "$CONFIG_DIR/"
+    cp "$INSTALL_DIR/program/sensei_nakama.conf" "$CONFIG_DIR/"
 else
     echo "Configuration directory $CONFIG_DIR already exists. Skipping configuration file copy."
 fi
